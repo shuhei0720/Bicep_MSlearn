@@ -1,6 +1,12 @@
+param location string = 'japaneast'
+param storageAccoutName string = 'toylaunch${uniqueString(resourceGroup().id)}'
+param appServiceAppName string = 'toylaunch${uniqueString(resourceGroup().id)}'
+
+var appServicePlanName ='toy-product-launch-plan'
+
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: 'toylaunchstorageshuhei'
-  location: 'japaneast'
+  name: storageAccoutName
+  location: location
   sku: {
     name: 'Standard_LRS'
   }
@@ -11,16 +17,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
 }
 
 resource appServicePlan 'Microsoft.Web/serverFarms@2022-03-01' = {
-  name: 'toy-product-launch-plan-starter'
-  location: 'japaneast'
+  name: appServicePlanName
+  location: location
   sku: {
     name: 'F1'
   }
 }
 
 resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
-  name: 'toy-product-launch-shuhei-1'
-  location: 'japaneast'
+  name: appServiceAppName
+  location: location
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
