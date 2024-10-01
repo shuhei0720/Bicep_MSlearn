@@ -12,6 +12,8 @@ param environmentName string = 'dev'
 param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
 
 @description('App Serviceプランのインスタンス数です。')
+@minValue(1)
+@maxValue(10)
 param appServicePlanInstanceCount int = 1
 
 @description('App ServiceプランのSKUの名前とティアです。')
