@@ -1,4 +1,9 @@
 @description('環境の名前です。dev,test,prodのどれかを指定します。')
+@allowed([
+  'dev'
+  'test'
+  'prod'
+])
 param environmentName string = 'dev'
 
 @description('solutionのユニークな名前です。リソースの名前をユニークにします。')
