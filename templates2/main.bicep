@@ -7,6 +7,8 @@
 param environmentName string = 'dev'
 
 @description('solutionのユニークな名前です。リソースの名前をユニークにします。')
+@minLength(5)
+@maxLength(30)
 param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
 
 @description('App Serviceプランのインスタンス数です。')
