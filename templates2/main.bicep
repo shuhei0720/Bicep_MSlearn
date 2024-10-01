@@ -17,13 +17,21 @@ param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
 param appServicePlanInstanceCount int = 1
 
 @description('App ServiceプランのSKUの名前とティアです。')
-param appServicePlanSku object = {
-  name: 'F1'
-  tier: 'Free'
-}
+param appServicePlanSku object
 
 @description('リソースをデプロイするAzureのリージョンです。')
 param location string = 'japaneast'
+
+@secure()
+@description('SQLServerのAdministratorログインのユーザー名です。')
+param sqlServerAdministratorLogin string
+
+@secure()
+@description('SQLServerのAdministratorログインのパスワードです。')
+param sqlServerAdministratorPassword string
+
+@description('SQLデータベースの名前とティア')
+param sqlDatabaseSku object
 
 var appServicePlanName = '${environmentName}-${solutionName}-plan'
 var appServiceAppName = '${environmentName}-${solutionName}-app'
