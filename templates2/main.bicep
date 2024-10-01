@@ -56,3 +56,22 @@ resource appServiceApp 'Microsoft.Web/sites@2023-12-01' = {
     httpsOnly: true
   }
 }
+
+resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = {
+  name: sqlServerName
+  location: location
+  properties: {
+    administratorLogin: sqlServerAdministratorLogin
+    administratorLoginPassword: sqlServerAdministratorPassword
+  }
+}
+
+resource sqlDatabase 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
+  parent: sqlServer
+  name: sqlDatabaseName
+  location: location
+  sku: {
+    name: sqlDatabaseSku.name
+    tier: sqlDatabaseSku.tier
+  }
+}
